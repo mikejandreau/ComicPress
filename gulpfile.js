@@ -1,36 +1,27 @@
 /**
- * Gulpfile.
- *
  * Gulp with WordPress.
  *
  * Implements:
- *      1. Live reloads browser with BrowserSync.
- *      2. CSS: Sass to CSS conversion, error catching, Autoprefixing, Sourcemaps,
- *         CSS minification, and Merge Media Queries.
- *      3. JS: Concatenates & uglifies Vendor and Custom JS files.
- *      4. Images: Minifies PNG, JPEG, GIF and SVG images.
- *      5. Watches files for changes in CSS or JS.
- *      6. Watches files for changes in PHP.
- *      7. Corrects the line endings.
- *      8. InjectCSS instead of browser page reload.
- *      9. Generates .pot file for i18n and l10n.
- *
- * @author Ahmad Awais (@ahmadawais)
- * @version 1.0.3
+ * 1. Live reloads browser with BrowserSync.
+ * 2. CSS: Sass to CSS conversion, error catching, Autoprefixing, Sourcemaps,
+ *    CSS minification, and Merge Media Queries.
+ * 3. JS: Concatenates & uglifies Vendor and Custom JS files.
+ * 4. Images: Minifies PNG, JPEG, GIF and SVG images.
+ * 5. Watches files for changes in CSS or JS.
+ * 6. Watches files for changes in PHP.
+ * 7. Corrects the line endings.
+ * 8. InjectCSS instead of browser page reload.
+ * 9. Generates .pot file for i18n and l10n.
  */
 
 /**
- * Configuration.
- *
- * Project Configuration for gulp tasks.
- *
- * In paths you can add <<glob or array of globs>>. Edit the variables as per your project requirements.
+ * Project Configuration for gulp tasks. Edit the variables as per your project requirements.
  */
 
 // START Editing Project Variables.
 // Project related.
-var project                 = 'WPGulpTheme'; // Project Name.
-var projectURL              = 'wpgulp.dev'; // Local project URL of your already running WordPress site. Could be something like local.dev or localhost:8888.
+var project                 = 'Steve_Milligan'; // Project Name.
+var projectURL              = 'dev4'; // Local project URL of your already running WordPress site. Could be something like local.dev or localhost:8888.
 var productURL              = './'; // Theme/Plugin URL. Leave it like it is, since our gulpfile.js lives in the root folder.
 
 // Translation related.
@@ -43,30 +34,27 @@ var team                    = 'WPTie <your_email@email.com>'; // Team's Email ID
 var translatePath           = './languages' // Where to save the translation files.
 
 // Style related.
-var styleSRC                = './assets/css/style.scss'; // Path to main .scss file.
+var styleSRC                = './assets/sass/style.scss'; // Path to main .scss file.
 var styleDestination        = './'; // Path to place the compiled CSS file.
 // Default set to root folder.
 
-// JS Vendor related.
-var jsVendorSRC             = './assets/js/vendor/*.js'; // Path to JS vendor folder.
-var jsVendorDestination     = './assets/js/'; // Path to place the compiled JS vendors file.
-var jsVendorFile            = 'vendors'; // Compiled JS vendors file name.
-// Default set to vendors i.e. vendors.js.
-
-// JS Custom related.
-var jsCustomSRC             = './assets/js/custom/*.js'; // Path to JS custom scripts folder.
-var jsCustomDestination     = './assets/js/'; // Path to place the compiled JS custom scripts file.
-var jsCustomFile            = 'custom'; // Compiled JS custom file name.
-// Default set to custom i.e. custom.js.
+// Javascript related.
+var scriptSRC             = [
+                              // './assets/js/vendor/jquery-2.2.4.js', // Include jQuery if you want
+                              './assets/js/vendor/navigation.js', // Pure JS class toggling
+                              './assets/js/vendor/skip-link-focus-fix.js', // WP skip link
+                              './assets/js/custom/*.js' // menu-controls.js, scroll-to-top.js, etc.
+                            ]; // Path to JS vendor and custom files in order.
+var scriptDestination     = './assets/js/'; // Path to place the compiled JS vendors file.
+var scriptFile            = 'scripts'; // Compiled JS vendors file name.
 
 // Images related.
 var imagesSRC               = './assets/img/raw/**/*.{png,jpg,gif,svg}'; // Source folder of images which should be optimized.
 var imagesDestination       = './assets/img/'; // Destination folder of optimized images. Must be different from the imagesSRC folder.
 
 // Watch files paths.
-var styleWatchFiles         = './assets/css/**/*.scss'; // Path to all *.scss files inside css folder and inside them.
-var vendorJSWatchFiles      = './assets/js/vendor/*.js'; // Path to all vendor JS files.
-var customJSWatchFiles      = './assets/js/custom/*.js'; // Path to all custom JS files.
+var styleWatchFiles         = './assets/sass/**/*.scss'; // Path to all *.scss files inside css folder and inside them
+var scriptJSWatchFiles      = ['./assets/js/vendor/*.js', './assets/js/custom/*.js']; // Path to all JS files.
 var projectPHPWatchFiles    = './**/*.php'; // Path to all PHP files.
 
 
@@ -217,48 +205,20 @@ gulp.task( 'browser-sync', function() {
   *     3. Renames the JS file with suffix .min.js
   *     4. Uglifes/Minifies the JS file and generates vendors.min.js
   */
- gulp.task( 'vendorsJs', function() {
-  gulp.src( jsVendorSRC )
-    .pipe( concat( jsVendorFile + '.js' ) )
+ gulp.task( 'scripts', function() {
+  gulp.src( scriptSRC )
+    .pipe( concat( scriptFile + '.js' ) )
     .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-    .pipe( gulp.dest( jsVendorDestination ) )
+    .pipe( gulp.dest( scriptDestination ) )
     .pipe( rename( {
-      basename: jsVendorFile,
+      basename: scriptFile,
       suffix: '.min'
     }))
     .pipe( uglify() )
     .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-    .pipe( gulp.dest( jsVendorDestination ) )
-    .pipe( notify( { message: 'TASK: "vendorsJs" Completed! 💯', onLast: true } ) );
+    .pipe( gulp.dest( scriptDestination ) )
+    .pipe( notify( { message: 'TASK: "scripts" Completed! 💯', onLast: true } ) );
  });
-
-
- /**
-  * Task: `customJS`.
-  *
-  * Concatenate and uglify custom JS scripts.
-  *
-  * This task does the following:
-  *     1. Gets the source folder for JS custom files
-  *     2. Concatenates all the files and generates custom.js
-  *     3. Renames the JS file with suffix .min.js
-  *     4. Uglifes/Minifies the JS file and generates custom.min.js
-  */
- gulp.task( 'customJS', function() {
-    gulp.src( jsCustomSRC )
-    .pipe( concat( jsCustomFile + '.js' ) )
-    .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-    .pipe( gulp.dest( jsCustomDestination ) )
-    .pipe( rename( {
-      basename: jsCustomFile,
-      suffix: '.min'
-    }))
-    .pipe( uglify() )
-    .pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
-    .pipe( gulp.dest( jsCustomDestination ) )
-    .pipe( notify( { message: 'TASK: "customJs" Completed! 💯', onLast: true } ) );
- });
-
 
  /**
   * Task: `images`.
@@ -317,9 +277,8 @@ gulp.task( 'browser-sync', function() {
   *
   * Watches for file changes and runs specific tasks.
   */
- gulp.task( 'default', ['styles', 'vendorsJs', 'customJS', 'images', 'browser-sync'], function () {
+ gulp.task( 'default', ['styles', 'scripts', 'images', 'browser-sync'], function () {
   gulp.watch( projectPHPWatchFiles, reload ); // Reload on PHP file changes.
   gulp.watch( styleWatchFiles, [ 'styles' ] ); // Reload on SCSS file changes.
-  gulp.watch( vendorJSWatchFiles, [ 'vendorsJs', reload ] ); // Reload on vendorsJs file changes.
-  gulp.watch( customJSWatchFiles, [ 'customJS', reload ] ); // Reload on customJS file changes.
- });
+  gulp.watch( scriptJSWatchFiles, [ 'scripts', reload ] ); // Reload on scripts file changes.
+});
