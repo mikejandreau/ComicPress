@@ -1,2 +1,24 @@
 $size__site-main: 100%;
 $size__site-sidebar: 25%;
+
+
+
+// Grid and layout variables for site structure
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+$size_site_main: 100%; 
+$size_site_sidebar: 33.333333%; 
+$size_site_sidebar_desktop: 25%; 
+$total_columns: 12; // number of columns in grid
+$column_margin: 20px; // gutter between columns calculated in grid
+
+// Responsive breakpoints for mixins
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+$width_mobile: 480px;
+$width_phablet: 640px;
+$width_tablet: 800px;
+$width_laptop: 1000px;
+$width_desktop: 1200px;
+$width_hdtv: 1600px;
+$hidden_mobile: $width_phablet - 1px;
+$hidden_phablet: $width_tablet - 1px;
+$wordpress_admin: 783px;

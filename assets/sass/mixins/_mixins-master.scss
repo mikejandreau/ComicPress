@@ -22,3 +22,63 @@
 @mixin clearfix-after() {
 	clear: both;
 }
+
+
+
+
+
+
+
+// Media queries
+// @include mobile { selector: style; }
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+@mixin mobile   { @media (min-width: #{$width_mobile})  { @content; } }
+@mixin phablet  { @media (min-width: #{$width_phablet}) { @content; } }
+@mixin tablet   { @media (min-width: #{$width_tablet})  { @content; } }
+@mixin laptop   { @media (min-width: #{$width_laptop})  { @content; } }
+@mixin desktop  { @media (min-width: #{$width_desktop}) { @content; } }
+@mixin hdtv     { @media (min-width: #{$width_hdtv})    { @content; } }
+@mixin nomobile { @media (max-width: #{$hidden_mobile}) { @content; } }
+@mixin nophablet { @media (max-width: #{$hidden_phablet}) { @content; } }
+@mixin wpadmin	{ @media (min-width: #{$wordpress_admin}) { @content; } }
+
+
+
+
+
+
+
+// Make background images fill div, marked !important to override WordPress featured image placement
+// @include bgImage;
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+@mixin bgImage() {
+	background-repeat: no-repeat !important; 
+	background-position: center !important;
+	background-size: cover !important;
+}
+
+// Aspect ratio mixin
+// @include aspectRatio(16, 9);
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+@mixin aspectRatio($ratio-or-width, $height: null) {
+	$padding: if($height, percentage($height/$ratio-or-width), percentage(1/$ratio-or-width));
+	&:before { content:''; float: left; padding-bottom: $padding; }
+	&:after  { content:''; display: table; clear: both; } 
+}
+
+// Top and bottom inset box shadow
+// @include innerShadow;
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+@mixin innerShadow() {
+    box-shadow: inset 0 $shadow-size $shadow-size (-$shadow-size) $shadow-inset, inset 0 (-$shadow-size) $shadow-size (-$shadow-size) $shadow-inset;
+}
+
+// Outer box shadow
+// @include dropShadow;
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+@mixin dropShadow() {
+    box-shadow: 0 0 $shadow-size 0 $shadow-outer, 0 0 $shadow-size 0 $shadow-outer;
+}
+
+
+
