@@ -40,3 +40,24 @@ figure {
 }
 
 @import "tables";
+
+
+
+
+// header {
+// 	@include bgImage;
+// }
+
+.custom-logo-link {
+    /* border: 1px solid blue; */
+    display: inline-block;
+    max-width: 200px;
+}
+
+.custom-logo {
+    display: block;
+
+    &:hover {
+    	opacity: 0.8;
+    }
+}
