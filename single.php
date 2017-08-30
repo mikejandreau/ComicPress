@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package Steve_Milligan
+ * @package Comic_Press
  */
 
 get_header(); ?>

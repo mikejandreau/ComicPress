@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Steve_Milligan
+ * @package Comic_Press
  */
 
 ?>
@@ -15,14 +15,14 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'stevemilligan' ) ); ?>"><?php
+			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'comicpress' ) ); ?>"><?php
 				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'stevemilligan' ), 'WordPress' );
+				printf( esc_html__( 'Proudly powered by %s', 'comicpress' ), 'WordPress' );
 			?></a>
 			<span class="sep"> | </span>
 			<?php
 				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'stevemilligan' ), 'stevemilligan', '<a href="https://vimeo.com/stevemilligan/">Steve Milligan</a>' );
+				printf( esc_html__( 'Theme: %1$s by %2$s.', 'comicpress' ), 'comicpress', '<a href="https://www.mikejandreau.net/">Mike Jandreau</a>' );
 			?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package Steve_Milligan
+ * @package Comic_Press
  */
 
 get_header(); ?>
