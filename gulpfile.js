@@ -20,16 +20,16 @@
 
 // START Editing Project Variables.
 // Project related.
-var project                 = 'ComicPress'; // Project Name.
+var project                 = 'Comic_Press'; // Project Name.
 var projectURL              = 'dev4'; // Local project URL of your already running WordPress site. Could be something like local.dev or localhost:8888.
 var productURL              = './'; // Theme/Plugin URL. Leave it like it is, since our gulpfile.js lives in the root folder.
 
 // Translation related.
-var text_domain             = 'WPGULP'; // Your textdomain here.
-var destFile                = 'WPGULP.pot'; // Name of the transalation file.
-var packageName             = 'WPGULP'; // Package name.
-var bugReport               = 'https://AhmadAwais.com/contact/'; // Where can users report bugs.
-var lastTranslator          = 'Ahmad Awais <your_email@email.com>'; // Last translator Email ID.
+var text_domain             = 'comicpress'; // Your textdomain here.
+var destFile                = 'comicpress.pot'; // Name of the transalation file.
+var packageName             = 'comicpress'; // Package name.
+var bugReport               = 'https://your_website.com/contact/'; // Where can users report bugs.
+var lastTranslator          = 'Firstname Lastname <your_email@email.com>'; // Last translator Email ID.
 var team                    = 'WPTie <your_email@email.com>'; // Team's Email ID.
 var translatePath           = './languages' // Where to save the translation files.
 
